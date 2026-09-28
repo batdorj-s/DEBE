@@ -1,0 +1,152 @@
+/* ============================================================
+   COMPONENTS - reusable visual patterns built on the tokens.
+   ============================================================ */
+
+
+/* Premium card effects */
+.premium-card {
+  @apply bg-card border border-border rounded-2xl;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark .premium-card {
+  background: linear-gradient(135deg, rgba(18, 18, 28, 0.95) 0%, rgba(22, 22, 34, 0.92) 100%);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 0 0 0.5px rgba(139, 92, 246, 0.1);
+}
+
+.premium-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.dark .premium-card:hover {
+  border-color: rgba(139, 92, 246, 0.35);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(139, 92, 246, 0.25), 0 0 20px rgba(139, 92, 246, 0.15);
+  transform: translateY(-1px);
+}
+
+/* KPI Card hover effects */
+.kpi-card {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.kpi-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(139, 92, 246, 0.2) !important;
+  transform: translateY(-2px);
+}
+
+.dark .kpi-card:hover {
+  border-color: rgba(139, 92, 246, 0.35) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(139, 92, 246, 0.3), 0 0 20px rgba(139, 92, 246, 0.12) !important;
+  transform: translateY(-2px);
+}
+
+/* Subtle glow for primary elements */
+.glow-primary {
+  box-shadow: 0 0 20px var(--color-glow-primary-soft);
+}
+
+.glow-primary:hover {
+  box-shadow: 0 0 28px var(--color-glow-primary);
+}
+
+/* Remove default tap highlight colors (blue/green) */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+/* Modern violet-based active states - NO TEAL/BLUE-GREEN */
+button:active:not(:disabled),
+[role="button"]:active:not(:disabled),
+[role="tab"]:active:not([data-state="active"]),
+[role="menuitem"]:active {
+  @apply dark:bg-primary/10 bg-primary/8;
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
+/* Custom scrollbar for sidebar (premium dark mode) */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 92, 246, 0.3) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(139, 92, 246, 0.3);
+  border-radius: 20px;
+  transition: background-color 0.2s;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(139, 92, 246, 0.5);
+}
+
+/* Thin scrollbar for messages/conversations lists */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 92, 246, 0.25) transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: rgba(139, 92, 246, 0.25);
+  border-radius: 20px;
+  transition: background-color 0.2s;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(139, 92, 246, 0.4);
+}
+
+/* Premium subtle animations for modals, dropdowns, popovers - NO SCALE/ZOOM */
+@keyframes subtle-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes subtle-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.animate-subtle-in {
+  animation: subtle-fade-in 120ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-subtle-out {
+  animation: subtle-fade-out 100ms cubic-bezier(0.4, 0, 1, 1);
+}

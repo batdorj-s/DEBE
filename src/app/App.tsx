@@ -61,6 +61,14 @@ interface Message {
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 const fmt = (n: number) => `${n.toLocaleString()}₮`;
 
+/** Budget usage color, keyed to the shared status-state tokens. */
+const budgetColor = (usedPct: number) =>
+  usedPct > 0.85
+    ? "var(--state-unmatched)"
+    : usedPct > 0.65
+      ? "var(--state-partial)"
+      : "var(--state-info)";
+
 type UserRole = "viewer" | "analyst" | "admin";
 const DEPT_DATA = [
   { id: 1, name: "IT хэлтэс",  budget: 2800000, spent: 500000 },
@@ -148,9 +156,9 @@ const NOAT_SUMMARY = (() => {
 })();
 
 const VAT_PIE_DATA = [
-  { name: "Тулгарсан", value: NOAT_SUMMARY.matched, color: "#10B981" },
-  { name: "Хэсэгчлэн", value: NOAT_SUMMARY.partial, color: "#F59E0B" },
-  { name: "Тулгараагүй", value: NOAT_SUMMARY.unmatched, color: "#EF4444" },
+  { name: "Тулгарсан", value: NOAT_SUMMARY.matched, color: "var(--state-matched)" },
+  { name: "Хэсэгчлэн", value: NOAT_SUMMARY.partial, color: "var(--state-partial)" },
+  { name: "Тулгараагүй", value: NOAT_SUMMARY.unmatched, color: "var(--state-unmatched)" },
 ];
 
 const fmtPct = (value: number) => `${value.toFixed(1)}%`;
@@ -322,7 +330,7 @@ function Topbar({ dept, deptId, onDeptChange }: { dept: typeof DEPT_DATA[0]; dep
   const [open, setOpen] = useState(false);
   const remaining = dept.budget - dept.spent;
   const usedPct = dept.spent / dept.budget;
-  const barColor = usedPct > 0.85 ? "#EF4444" : usedPct > 0.65 ? "#F59E0B" : "#3B82F6";
+  const barColor = budgetColor(usedPct);
 
   return (
     <div className="h-11 border-b border-border bg-card/60 backdrop-blur flex items-center justify-between px-5 shrink-0 relative">
@@ -370,7 +378,7 @@ function Topbar({ dept, deptId, onDeptChange }: { dept: typeof DEPT_DATA[0]; dep
             {DEPT_DATA.map((d) => {
               const r = d.budget - d.spent;
               const pct = d.spent / d.budget;
-              const col = pct > 0.85 ? "#EF4444" : pct > 0.65 ? "#F59E0B" : "#3B82F6";
+              const col = budgetColor(pct);
               return (
                 <button
                   key={d.id}
@@ -649,7 +657,7 @@ function AskAITab({ onNavigate, dept, userRole }: { onNavigate: (t: Tab) => void
             ))}
           </div>
 
-          <div className="flex items-center gap-2 rounded-xl px-3 py-2.5 border border-[rgba(255,255,255,0.1)] bg-[#0C0F18] focus-within:border-primary/50 transition-colors">
+          <div className="flex items-center gap-2 rounded-xl px-3 py-2.5 border border-border bg-background focus-within:border-primary/50 transition-colors">
             <Zap size={12} className="text-primary shrink-0" />
             <input
               value={input}
@@ -1243,7 +1251,7 @@ function MiniStat({ label, value, sub, color }: { label: string; value: string; 
 // ChartStyle emits --color-budget / --color-actual scoped to the chart id.
 const BUDGET_CHART_CONFIG = {
   budget: { label: "Хуваарь", color: "rgba(139, 92, 246, 0.30)" },
-  actual: { label: "Зарцуулалт", color: "#8B5CF6" },
+  actual: { label: "Зарцуулалт", color: "var(--primary)" },
 } satisfies ChartConfig;
 
 function BudgetBars({ data }: { data: { dept: string; budget: number; actual: number }[] }) {
@@ -1276,11 +1284,10 @@ function BudgetBars({ data }: { data: { dept: string; budget: number; actual: nu
   );
 }
 
-// Pure SVG donut chart — no Recharts
 const VAT_CHART_CONFIG = {
-  Тулгарсан: { label: "Тулгарсан", color: "#10B981" },
-  Хэсэгчлэн: { label: "Хэсэгчлэн", color: "#F59E0B" },
-  Тулгараагүй: { label: "Тулгараагүй", color: "#EF4444" },
+  Тулгарсан: { label: "Тулгарсан", color: "var(--state-matched)" },
+  Хэсэгчлэн: { label: "Хэсэгчлэн", color: "var(--state-partial)" },
+  Тулгараагүй: { label: "Тулгараагүй", color: "var(--state-unmatched)" },
 } satisfies ChartConfig;
 
 function SvgDonut({ data }: { data: { name: string; value: number; color: string }[] }) {
