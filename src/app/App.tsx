@@ -233,7 +233,7 @@ function Sidebar({ activeTab, onTabChange, userRole, onRoleChange }: { activeTab
             </div>
             <div className="flex items-center gap-1.5 mt-0.5">
               <div className="text-2xs text-muted-foreground font-mono">v1.0.0</div>
-              <span className="text-2xs px-1 py-0 rounded bg-amber-500/15 border border-amber-500/30 text-amber-400 font-mono">DEMO</span>
+              <span className="text-2xs px-1 py-0 rounded bg-accent-amber-fill/15 border border-accent-amber-fill/30 text-accent-amber-text font-mono">DEMO</span>
             </div>
           </div>
         </div>
@@ -273,9 +273,9 @@ function Sidebar({ activeTab, onTabChange, userRole, onRoleChange }: { activeTab
               { name: "Gemini", active: false, note: "нөөц" },
             ].map((llm) => (
               <div key={llm.name} className="flex items-center gap-1.5">
-                <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${llm.active ? "bg-green-400 animate-pulse" : "bg-border"}`} />
+                <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${llm.active ? "bg-state-matched-fill-soft animate-pulse" : "bg-border"}`} />
                 <span
-                  className={`text-2xs ${llm.active ? "text-green-400" : "text-muted-foreground"} font-mono`}
+                  className={`text-2xs ${llm.active ? "text-state-matched-text" : "text-muted-foreground"} font-mono`}
 
                 >
                   {llm.name}
@@ -318,7 +318,7 @@ function Sidebar({ activeTab, onTabChange, userRole, onRoleChange }: { activeTab
               {userRole === "viewer" ? "харагч" : userRole === "analyst" ? "аналист" : "admin"}
             </div>
           </div>
-          <div className="w-1.5 h-1.5 rounded-full bg-green-400 shrink-0" />
+          <div className="w-1.5 h-1.5 rounded-full bg-state-matched-fill-soft shrink-0" />
         </div>
       </div>
     </div>
@@ -336,7 +336,7 @@ function Topbar({ dept, deptId, onDeptChange }: { dept: typeof DEPT_DATA[0]; dep
     <div className="h-11 border-b border-border bg-card/60 backdrop-blur flex items-center justify-between px-5 shrink-0 relative">
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-1.5">
-          <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+          <div className="w-1.5 h-1.5 rounded-full bg-state-matched-fill-soft animate-pulse" />
           <span className="text-xs text-muted-foreground font-mono">
             Онлайн
           </span>
@@ -602,13 +602,13 @@ function AskAITab({ onNavigate, dept, userRole }: { onNavigate: (t: Tab) => void
                     onClick={() => handleSend(preset.text, preset.mode)}
                     className={`flex items-start gap-3 text-left px-4 py-3.5 rounded-xl border transition-all hover:scale-[1.01] ${
                       preset.mode === "budget_exceeded"
-                        ? "border-red-500/25 bg-red-500/5 hover:bg-red-500/10 hover:border-red-500/40"
+                        ? "border-state-unmatched-fill/25 bg-state-unmatched-fill/5 hover:bg-state-unmatched-fill/10 hover:border-state-unmatched-fill/40"
                         : "border-primary/20 bg-primary/5 hover:bg-primary/10 hover:border-primary/35"
                     }`}
                   >
                     <span className="text-xl shrink-0 mt-0.5">{preset.icon}</span>
                     <div>
-                      <div className={`text-xs font-semibold ${preset.mode === "budget_exceeded" ? "text-red-400" : "text-primary"}`}>
+                      <div className={`text-xs font-semibold ${preset.mode === "budget_exceeded" ? "text-state-unmatched-text" : "text-primary"}`}>
                         {preset.label}
                       </div>
                       <div className="text-xs text-muted-foreground mt-0.5">{preset.text}</div>
@@ -646,7 +646,7 @@ function AskAITab({ onNavigate, dept, userRole }: { onNavigate: (t: Tab) => void
                 disabled={isRunning}
                 className={`flex items-center gap-1 text-2xs px-2 py-1 rounded-lg border transition-colors disabled:opacity-40 ${
                   preset.mode === "budget_exceeded"
-                    ? "border-red-500/30 text-red-400 bg-red-500/5 hover:bg-red-500/10"
+                    ? "border-state-unmatched-fill/30 text-state-unmatched-text bg-state-unmatched-fill/5 hover:bg-state-unmatched-fill/10"
                     : "border-primary/30 text-primary bg-primary/5 hover:bg-primary/10"
                 } font-mono`}
 
@@ -709,7 +709,7 @@ function AskAITab({ onNavigate, dept, userRole }: { onNavigate: (t: Tab) => void
             </div>
             <div className="space-y-1.5">
               {PRICE_COMPARISON.map((row, i) => (
-                <div key={i} className={`flex items-center justify-between text-xs ${row.best ? "text-green-400" : "text-muted-foreground"}`}>
+                <div key={i} className={`flex items-center justify-between text-xs ${row.best ? "text-state-matched-text" : "text-muted-foreground"}`}>
                   <span className="truncate max-w-[140px] flex items-center gap-1">
                     {row.best && <span>★</span>}
                     {row.supplier}
@@ -718,7 +718,7 @@ function AskAITab({ onNavigate, dept, userRole }: { onNavigate: (t: Tab) => void
                 </div>
               ))}
             </div>
-            <div className="mt-2 pt-2 border-t border-border text-2xs text-green-400/70 font-mono">
+            <div className="mt-2 pt-2 border-t border-border text-2xs text-state-matched-text/70 font-mono">
               Хэмнэлт: 3,000₮ · OfficeWorld-с
             </div>
           </div>
@@ -781,12 +781,12 @@ function AgentCard({ icon, name, meta, status, output, calls, elapsed }: {
   return (
     <div
       className={`rounded-xl border p-3 transition-all duration-300 ${
-        status === "processing" ? "border-primary/40 bg-primary/5" : status === "done" ? "border-green-500/30 bg-green-500/5" : "border-border bg-card/30"
+        status === "processing" ? "border-primary/40 bg-primary/5" : status === "done" ? "border-state-matched-fill/30 bg-state-matched-fill/5" : "border-border bg-card/30"
       }`}
     >
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-2 min-w-0">
-          <span className={`shrink-0 ${status === "processing" ? "text-primary" : status === "done" ? "text-green-400" : "text-muted-foreground"}`}>
+          <span className={`shrink-0 ${status === "processing" ? "text-primary" : status === "done" ? "text-state-matched-text" : "text-muted-foreground"}`}>
             {status === "processing" ? <span className="relative flex"><span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-40" style={{ background: "currentColor" }} />{icon}</span> : icon}
           </span>
           <div className="min-w-0">
@@ -803,14 +803,14 @@ function AgentCard({ icon, name, meta, status, output, calls, elapsed }: {
       {calls.length > 0 && (
         <div className="mt-2 space-y-0.5">
           {calls.map((call, i) => (
-            <div key={i} className="text-2xs text-blue-300/70 bg-blue-500/5 rounded px-2 py-1 border border-blue-500/10 font-mono truncate">
+            <div key={i} className="text-2xs text-state-info-text-bright/70 bg-state-info-fill/5 rounded px-2 py-1 border border-state-info-fill/10 font-mono truncate">
               ⟶ {call}
             </div>
           ))}
         </div>
       )}
       {output && (
-        <div className={`mt-1.5 text-2xs rounded-lg px-2 py-1.5 border ${status === "done" && !output.includes("ДУТАГДАЖ") ? "text-green-400/80 bg-green-500/5 border-green-500/10" : output.includes("ДУТАГДАЖ") ? "text-red-400/80 bg-red-500/5 border-red-500/10" : "text-primary/80 bg-primary/5 border-primary/10"} font-mono`}>
+        <div className={`mt-1.5 text-2xs rounded-lg px-2 py-1.5 border ${status === "done" && !output.includes("ДУТАГДАЖ") ? "text-state-matched-text/80 bg-state-matched-fill/5 border-state-matched-fill/10" : output.includes("ДУТАГДАЖ") ? "text-state-unmatched-text/80 bg-state-unmatched-fill/5 border-state-unmatched-fill/10" : "text-primary/80 bg-primary/5 border-primary/10"} font-mono`}>
           {output}
         </div>
       )}
@@ -828,7 +828,7 @@ function AgentBadge({ status }: { status: AgentStatus }) {
       </span>
     );
   return (
-    <span className="flex items-center gap-1 text-2xs text-green-400 px-1.5 py-0.5 border border-green-500/30 rounded bg-green-500/10 font-mono">
+    <span className="flex items-center gap-1 text-2xs text-state-matched-text px-1.5 py-0.5 border border-state-matched-fill/30 rounded bg-state-matched-fill/10 font-mono">
       <Check size={8} />ДУУСАВ
     </span>
   );
@@ -890,7 +890,7 @@ function ApprovalCard({ onApprove, onReject }: { onApprove: () => void; onReject
         <div className="rounded-lg bg-secondary/60 border border-border p-3 space-y-2">
           <div className="flex justify-between text-2xs text-muted-foreground font-mono">
             <span>Төсвийн үлдэгдэл</span>
-            <span className="text-green-400">OK ✓</span>
+            <span className="text-state-matched-text">OK ✓</span>
           </div>
           <div className="space-y-1.5">
             <div className="flex items-center gap-2 text-2xs font-mono">
@@ -920,15 +920,15 @@ function ApprovalCard({ onApprove, onReject }: { onApprove: () => void; onReject
           <div className="rounded-lg bg-secondary p-2">
             <div className="text-2xs text-muted-foreground font-mono">Эрсдэлийн оноо</div>
             <div className="text-xs font-semibold text-foreground mt-0.5">2 / 10 — БАГА</div>
-            <div className="text-2xs text-green-400/80 mt-0.5 font-mono">Аюулгүй гүйлгээ</div>
+            <div className="text-2xs text-state-matched-text/80 mt-0.5 font-mono">Аюулгүй гүйлгээ</div>
           </div>
         </div>
 
         <div className="flex gap-2 pt-1">
-          <button onClick={onApprove} className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-green-600 hover:bg-green-500 text-white text-xs font-bold transition-colors">
+          <button onClick={onApprove} className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-state-matched-fill-strong hover:bg-state-matched-fill text-white text-xs font-bold transition-colors">
             <Check size={12} />ЗӨВШӨӨРӨХ
           </button>
-          <button onClick={onReject} className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-red-600/80 hover:bg-red-600 text-white text-xs font-bold transition-colors">
+          <button onClick={onReject} className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-state-unmatched-fill-strong/80 hover:bg-state-unmatched-fill-strong text-white text-xs font-bold transition-colors">
             <X size={12} />ТАТГАЛЗАХ
           </button>
         </div>
@@ -1014,18 +1014,18 @@ function NOATTab() {
                 <div
                   key={i}
                   className={`flex items-start gap-3 p-2.5 rounded-lg transition-all duration-300 ${
-                    stepActive ? "bg-primary/10 border border-primary/25" : stepDone ? "bg-green-500/5 border border-green-500/15" : "border border-transparent opacity-45"
+                    stepActive ? "bg-primary/10 border border-primary/25" : stepDone ? "bg-state-matched-fill/5 border border-state-matched-fill/15" : "border border-transparent opacity-45"
                   }`}
                 >
                   <div
                     className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 border text-2xs font-bold transition-colors ${
-                      stepActive ? "border-primary text-primary" : stepDone ? "border-green-500 bg-green-500/20 text-green-400" : "border-border text-muted-foreground"
+                      stepActive ? "border-primary text-primary" : stepDone ? "border-state-matched-fill bg-state-matched-fill/20 text-state-matched-text" : "border-border text-muted-foreground"
                     }`}
                   >
                     {stepDone ? <Check size={9} /> : step.step}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <div className={`text-xs font-semibold ${stepActive ? "text-primary" : stepDone ? "text-green-400" : "text-foreground"}`}>{step.name}</div>
+                    <div className={`text-xs font-semibold ${stepActive ? "text-primary" : stepDone ? "text-state-matched-text" : "text-foreground"}`}>{step.name}</div>
                     <div className="text-2xs text-muted-foreground mt-0.5 font-mono">{step.code}</div>
                   </div>
                   {stepActive && <Loader2 size={11} className="animate-spin text-primary shrink-0 mt-1" />}
@@ -1049,7 +1049,7 @@ function NOATTab() {
                 <span className="text-sm font-semibold text-foreground font-display">Тулгалтын дэлгэрэнгүй · {NOAT_SUMMARY.total} гүйлгээ</span>
                 <button
                   onClick={handleExport}
-                  className="flex items-center gap-1.5 text-xs font-semibold text-white bg-green-600 hover:bg-green-500 transition-colors px-3 py-1.5 rounded-lg"
+                  className="flex items-center gap-1.5 text-xs font-semibold text-white bg-state-matched-fill-strong hover:bg-state-matched-fill transition-colors px-3 py-1.5 rounded-lg"
                 >
                   <Download size={11} />Excel татах (.xlsx)
                 </button>
@@ -1069,7 +1069,7 @@ function NOATTab() {
                       <tr
                         key={row.id}
                         className={`border-b border-border/40 hover:bg-secondary/30 transition-colors ${
-                          row.status === "matched" ? "hover:bg-green-500/5" : row.status === "partial" ? "hover:bg-yellow-500/5" : "hover:bg-red-500/5"
+                          row.status === "matched" ? "hover:bg-state-matched-fill/5" : row.status === "partial" ? "hover:bg-state-partial-fill/5" : "hover:bg-state-unmatched-fill/5"
                         }`}
                       >
                         <td className="px-3 py-2.5 text-2xs text-muted-foreground font-mono">{row.id}</td>
@@ -1086,7 +1086,7 @@ function NOATTab() {
                           <div className="flex items-center gap-1.5">
                             <div className="h-1.5 w-12 rounded-full bg-secondary overflow-hidden">
                               <div
-                                className={`h-full rounded-full ${row.status === "matched" ? "bg-green-500" : row.status === "partial" ? "bg-yellow-500" : "bg-red-500"}`}
+                                className={`h-full rounded-full ${row.status === "matched" ? "bg-state-matched-fill" : row.status === "partial" ? "bg-state-partial-fill" : "bg-state-unmatched-fill"}`}
                                 style={{ width: `${row.score}%` }}
                               />
                             </div>
@@ -1097,10 +1097,10 @@ function NOATTab() {
                           <span
                             className={`text-2xs px-1.5 py-0.5 rounded border ${
                               row.status === "matched"
-                                ? "border-green-500/30 text-green-400 bg-green-500/10"
+                                ? "border-state-matched-fill/30 text-state-matched-text bg-state-matched-fill/10"
                                 : row.status === "partial"
-                                ? "border-yellow-500/30 text-yellow-400 bg-yellow-500/10"
-                                : "border-red-500/30 text-red-400 bg-red-500/10"
+                                ? "border-state-partial-fill/30 text-state-partial-text bg-state-partial-fill/10"
+                                : "border-state-unmatched-fill/30 text-state-unmatched-text bg-state-unmatched-fill/10"
                             } font-mono`}
 
                           >
@@ -1179,9 +1179,9 @@ function UploadCard({
     <div
       className={`rounded-xl border-2 border-dashed p-4 transition-all focus-within:ring-2 focus-within:ring-primary/60 focus-within:ring-offset-1 focus-within:ring-offset-background ${
         error
-          ? "border-red-500/50 bg-red-500/5"
+          ? "border-state-unmatched-fill/50 bg-state-unmatched-fill/5"
           : uploaded
-            ? "border-green-500/40 bg-green-500/5"
+            ? "border-state-matched-fill/40 bg-state-matched-fill/5"
             : "border-border hover:border-primary/40 hover:bg-primary/5"
       }`}
     >
@@ -1195,7 +1195,7 @@ function UploadCard({
           aria-describedby={error ? errorId : undefined}
           aria-invalid={error ? true : undefined}
         />
-        <span className={uploaded && !error ? "text-green-400" : "text-muted-foreground"}>{icon}</span>
+        <span className={uploaded && !error ? "text-state-matched-text" : "text-muted-foreground"}>{icon}</span>
         <span className="flex-1 min-w-0">
           <span className="block text-xs font-semibold text-foreground">{label}</span>
           <span className="block text-2xs text-muted-foreground font-mono">{sub}</span>
@@ -1219,11 +1219,11 @@ function UploadCard({
       </label>
 
       {error ? (
-        <p id={errorId} role="alert" className="mt-2 text-2xs text-red-400">
+        <p id={errorId} role="alert" className="mt-2 text-2xs text-state-unmatched-text">
           {error}
         </p>
       ) : uploaded ? (
-        <p className="mt-2 text-2xs text-green-400/80 font-mono truncate">
+        <p className="mt-2 text-2xs text-state-matched-text/80 font-mono truncate">
           ✓ {fileName}
         </p>
       ) : null}
@@ -1233,10 +1233,10 @@ function UploadCard({
 
 function MiniStat({ label, value, sub, color }: { label: string; value: string; sub?: string; color: "blue" | "green" | "yellow" | "red" }) {
   const cfg = {
-    blue: "text-blue-400 border-blue-500/20 bg-blue-500/5",
-    green: "text-green-400 border-green-500/20 bg-green-500/5",
-    yellow: "text-yellow-400 border-yellow-500/20 bg-yellow-500/5",
-    red: "text-red-400 border-red-500/20 bg-red-500/5",
+    blue: "text-state-info-text border-state-info-fill/20 bg-state-info-fill/5",
+    green: "text-state-matched-text border-state-matched-fill/20 bg-state-matched-fill/5",
+    yellow: "text-state-partial-text border-state-partial-fill/20 bg-state-partial-fill/5",
+    red: "text-state-unmatched-text border-state-unmatched-fill/20 bg-state-unmatched-fill/5",
   };
   return (
     <div className={`rounded-xl border p-3 ${cfg[color]}`}>
@@ -1407,9 +1407,9 @@ function DashboardTab() {
                   <td className="px-4 py-3 text-xs text-foreground">{row.supplier}</td>
                   <td className="px-4 py-3 text-xs font-mono">{fmt(row.amount)}</td>
                   <td className="px-4 py-3 text-xs text-muted-foreground">{row.dept}</td>
-                  <td className="px-4 py-3 text-xs text-green-400 font-mono">-{fmt(row.saved)}</td>
+                  <td className="px-4 py-3 text-xs text-state-matched-text font-mono">-{fmt(row.saved)}</td>
                   <td className="px-4 py-3">
-                    <span className={`text-2xs px-1.5 py-0.5 rounded border ${row.status === "done" ? "border-green-500/30 text-green-400 bg-green-500/10" : "border-yellow-500/30 text-yellow-400 bg-yellow-500/10"} font-mono`}>
+                    <span className={`text-2xs px-1.5 py-0.5 rounded border ${row.status === "done" ? "border-state-matched-fill/30 text-state-matched-text bg-state-matched-fill/10" : "border-state-partial-fill/30 text-state-partial-text bg-state-partial-fill/10"} font-mono`}>
                       {row.status === "done" ? "ДУУСАВ" : "ХҮЛЭЭГДЭЖ БУЙ"}
                     </span>
                   </td>
@@ -1431,7 +1431,7 @@ function KPICard({ title, value, sub, icon, trend }: { title: string; value: str
         <span className="text-muted-foreground">{icon}</span>
       </div>
       <div className="text-2xl font-bold text-foreground mt-2 font-display">{value}</div>
-      <div className={`text-2xs mt-1 ${trend === "up" ? "text-green-400" : trend === "down" ? "text-red-400" : "text-muted-foreground"} font-mono`}>
+      <div className={`text-2xs mt-1 ${trend === "up" ? "text-state-matched-text" : trend === "down" ? "text-state-unmatched-text" : "text-muted-foreground"} font-mono`}>
         {sub}
       </div>
     </div>
@@ -1449,13 +1449,13 @@ function AuditLogTab({ userRole }: { userRole: UserRole }) {
   const [activeAuditTab, setActiveAuditTab] = useState<"log" | "pending">("log");
 
   const typeConfig = {
-    approval: { icon: <Check size={9} />, cls: "text-green-400 border-green-500/30 bg-green-500/10", label: "БАТЛАЛ" },
-    agent: { icon: <Bot size={9} />, cls: "text-blue-400 border-blue-500/30 bg-blue-500/10", label: "АГЕНТ" },
-    request: { icon: <MessageSquare size={9} />, cls: "text-purple-400 border-purple-500/30 bg-purple-500/10", label: "ХҮСЭЛТ" },
-    audit: { icon: <ShieldCheck size={9} />, cls: "text-cyan-400 border-cyan-500/30 bg-cyan-500/10", label: "АУДИТ" },
-    export: { icon: <Download size={9} />, cls: "text-orange-400 border-orange-500/30 bg-orange-500/10", label: "ЭКСПОРТ" },
-    risk: { icon: <AlertTriangle size={9} />, cls: "text-red-400 border-red-500/30 bg-red-500/10", label: "ЭРСДЭЛ" },
-    login: { icon: <User size={9} />, cls: "text-slate-400 border-slate-500/30 bg-slate-500/10", label: "НЭВТРЭЛТ" },
+    approval: { icon: <Check size={9} />, cls: "text-state-matched-text border-state-matched-fill/30 bg-state-matched-fill/10", label: "БАТЛАЛ" },
+    agent: { icon: <Bot size={9} />, cls: "text-state-info-text border-state-info-fill/30 bg-state-info-fill/10", label: "АГЕНТ" },
+    request: { icon: <MessageSquare size={9} />, cls: "text-accent-purple-text border-accent-purple-fill/30 bg-accent-purple-fill/10", label: "ХҮСЭЛТ" },
+    audit: { icon: <ShieldCheck size={9} />, cls: "text-accent-cyan-text border-accent-cyan-fill/30 bg-accent-cyan-fill/10", label: "АУДИТ" },
+    export: { icon: <Download size={9} />, cls: "text-accent-orange-text border-accent-orange-fill/30 bg-accent-orange-fill/10", label: "ЭКСПОРТ" },
+    risk: { icon: <AlertTriangle size={9} />, cls: "text-state-unmatched-text border-state-unmatched-fill/30 bg-state-unmatched-fill/10", label: "ЭРСДЭЛ" },
+    login: { icon: <User size={9} />, cls: "text-accent-slate-text border-accent-slate-fill/30 bg-accent-slate-fill/10", label: "НЭВТРЭЛТ" },
   } as const;
 
   const filtered = AUDIT_LOG.filter(
@@ -1491,7 +1491,7 @@ function AuditLogTab({ userRole }: { userRole: UserRole }) {
         {activeAuditTab === "pending" && (
           <div className="space-y-3">
             {PENDING_APPROVALS.map((item) => (
-              <div key={item.id} className="rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-4 space-y-3">
+              <div key={item.id} className="rounded-xl border border-state-partial-fill/20 bg-state-partial-fill/5 p-4 space-y-3">
                 <div className="flex items-start justify-between gap-2">
                   <div>
                     <div className="text-xs font-semibold text-foreground">{item.item}</div>
@@ -1503,10 +1503,10 @@ function AuditLogTab({ userRole }: { userRole: UserRole }) {
                 </div>
                 {userRole === "admin" ? (
                   <div className="flex gap-2">
-                    <button className="flex-1 flex items-center justify-center gap-1 py-2 rounded-lg bg-green-600 hover:bg-green-500 text-white text-xs font-bold transition-colors">
+                    <button className="flex-1 flex items-center justify-center gap-1 py-2 rounded-lg bg-state-matched-fill-strong hover:bg-state-matched-fill text-white text-xs font-bold transition-colors">
                       <Check size={11} />Зөвшөөрөх
                     </button>
-                    <button className="flex-1 flex items-center justify-center gap-1 py-2 rounded-lg bg-red-600/80 hover:bg-red-600 text-white text-xs font-bold transition-colors">
+                    <button className="flex-1 flex items-center justify-center gap-1 py-2 rounded-lg bg-state-unmatched-fill-strong/80 hover:bg-state-unmatched-fill-strong text-white text-xs font-bold transition-colors">
                       <X size={11} />Татгалзах
                     </button>
                   </div>

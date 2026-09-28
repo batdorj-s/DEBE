@@ -91,6 +91,39 @@
   --state-unmatched: #EF4444;
   --state-info: #3B82F6;
 
+  /* Shades for each status, split by role (text / fill / border).
+     Values are copied verbatim from Tailwind's own palette definitions so that
+     moving the UI onto these tokens renders exactly the same colour as before.
+     Do not hand-convert these to hex: the palette is defined in oklch and a
+     round-trip through sRGB shifts the rendered value. */
+  --state-matched-text: oklch(79.2% 0.209 151.711);
+  --state-matched-fill: oklch(72.3% 0.219 149.579);
+  --state-matched-fill-strong: oklch(62.7% 0.194 149.214);
+  --state-matched-fill-soft: oklch(79.2% 0.209 151.711);
+
+  --state-partial-text: oklch(85.2% 0.199 91.936);
+  --state-partial-fill: oklch(79.5% 0.184 86.047);
+
+  --state-unmatched-text: oklch(70.4% 0.191 22.216);
+  --state-unmatched-fill: oklch(63.7% 0.237 25.331);
+  --state-unmatched-fill-strong: oklch(57.7% 0.245 27.325);
+
+  --state-info-text: oklch(70.7% 0.165 254.624);
+  --state-info-text-bright: oklch(80.9% 0.105 251.813);
+  --state-info-fill: oklch(62.3% 0.214 259.815);
+
+  /* Accents used for per-agent identity chips. */
+  --accent-purple-text: oklch(71.4% 0.203 305.504);
+  --accent-purple-fill: oklch(62.7% 0.265 303.9);
+  --accent-cyan-text: oklch(78.9% 0.154 211.53);
+  --accent-cyan-fill: oklch(71.5% 0.143 215.221);
+  --accent-orange-text: oklch(75% 0.183 55.934);
+  --accent-orange-fill: oklch(70.5% 0.213 47.604);
+  --accent-amber-text: oklch(82.8% 0.189 84.429);
+  --accent-amber-fill: oklch(76.9% 0.188 70.08);
+  --accent-slate-text: oklch(70.4% 0.04 256.788);
+  --accent-slate-fill: oklch(55.4% 0.046 257.417);
+
   /* KPIs & Charts */
   --kpi-value: #C7B8FF;
   --delta-positive: #2AF07A;
@@ -171,6 +204,28 @@
   --color-state-partial: var(--state-partial);
   --color-state-unmatched: var(--state-unmatched);
   --color-state-info: var(--state-info);
+  --color-state-matched-text: var(--state-matched-text);
+  --color-state-matched-fill: var(--state-matched-fill);
+  --color-state-matched-fill-strong: var(--state-matched-fill-strong);
+  --color-state-matched-fill-soft: var(--state-matched-fill-soft);
+  --color-state-partial-text: var(--state-partial-text);
+  --color-state-partial-fill: var(--state-partial-fill);
+  --color-state-unmatched-text: var(--state-unmatched-text);
+  --color-state-unmatched-fill: var(--state-unmatched-fill);
+  --color-state-unmatched-fill-strong: var(--state-unmatched-fill-strong);
+  --color-state-info-text: var(--state-info-text);
+  --color-state-info-text-bright: var(--state-info-text-bright);
+  --color-state-info-fill: var(--state-info-fill);
+  --color-accent-purple-text: var(--accent-purple-text);
+  --color-accent-purple-fill: var(--accent-purple-fill);
+  --color-accent-cyan-text: var(--accent-cyan-text);
+  --color-accent-cyan-fill: var(--accent-cyan-fill);
+  --color-accent-orange-text: var(--accent-orange-text);
+  --color-accent-orange-fill: var(--accent-orange-fill);
+  --color-accent-amber-text: var(--accent-amber-text);
+  --color-accent-amber-fill: var(--accent-amber-fill);
+  --color-accent-slate-text: var(--accent-slate-text);
+  --color-accent-slate-fill: var(--accent-slate-fill);
   --color-delta-positive: var(--delta-positive);
   --color-delta-negative: var(--delta-negative);
   --color-grid-line: var(--grid-line);
