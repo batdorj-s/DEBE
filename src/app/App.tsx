@@ -262,30 +262,6 @@ function Sidebar({ activeTab, onTabChange, userRole, onRoleChange }: { activeTab
       </nav>
 
       <div className="p-3 border-t border-border space-y-3">
-        {/* Failover chain — only actual LLMs used */}
-        <div className="rounded-lg bg-secondary/60 p-2.5 border border-border">
-          <div className="text-2xs text-muted-foreground mb-2 font-mono">
-            LLM FAILOVER
-          </div>
-          <div className="space-y-1.5">
-            {[
-              { name: "Groq", active: true, note: "үндсэн" },
-              { name: "Gemini", active: false, note: "нөөц" },
-            ].map((llm) => (
-              <div key={llm.name} className="flex items-center gap-1.5">
-                <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${llm.active ? "bg-state-matched-fill-soft animate-pulse" : "bg-border"}`} />
-                <span
-                  className={`text-2xs ${llm.active ? "text-state-matched-text" : "text-muted-foreground"} font-mono`}
-
-                >
-                  {llm.name}
-                </span>
-                <span className="text-2xs text-muted-foreground/50 ml-auto font-mono">{llm.note}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* Role toggle */}
         <div className="rounded-lg bg-secondary/60 p-2.5 border border-border">
           <div className="text-2xs text-muted-foreground mb-1.5 font-mono">ЭРХ</div>
@@ -334,19 +310,6 @@ function Topbar({ dept, deptId, onDeptChange }: { dept: typeof DEPT_DATA[0]; dep
 
   return (
     <div className="h-11 border-b border-border bg-card/60 backdrop-blur flex items-center justify-between px-5 shrink-0 relative">
-      <div className="flex items-center gap-3">
-        <div className="flex items-center gap-1.5">
-          <div className="w-1.5 h-1.5 rounded-full bg-state-matched-fill-soft animate-pulse" />
-          <span className="text-xs text-muted-foreground font-mono">
-            Онлайн
-          </span>
-        </div>
-        <div className="h-3 w-px bg-border" />
-        <span className="text-xs text-muted-foreground font-mono">
-          LangGraph · MCP · PostgreSQL · Groq
-        </span>
-      </div>
-
       {/* Department switcher */}
       <div className="relative">
         <button
@@ -682,9 +645,6 @@ function AskAITab({ onNavigate, dept, userRole }: { onNavigate: (t: Tab) => void
               <Send size={12} />
             </button>
           </div>
-          <p className="text-2xs text-muted-foreground text-center font-mono">
-            Human-in-the-Loop · Автомат гүйлгээ хийгдэхгүй
-          </p>
         </div>
       </div>
 
@@ -723,29 +683,6 @@ function AskAITab({ onNavigate, dept, userRole }: { onNavigate: (t: Tab) => void
             </div>
           </div>
         )}
-
-        <div className="rounded-xl border border-border bg-card/30 p-3 mt-1">
-          <div className="text-2xs text-muted-foreground mb-2 uppercase tracking-wider font-mono">
-            RBAC
-          </div>
-          <div className="space-y-1">
-            {[
-              { role: "viewer", desc: "Унших зөвшөөрөл" },
-              { role: "analyst", desc: "Excel экспорт" },
-              { role: "admin", desc: "Батлах / цуцлах" },
-            ].map((r) => (
-              <div key={r.role} className="flex items-center gap-2">
-                <span
-                  className={`text-2xs px-1.5 py-0.5 rounded border ${r.role === "admin" ? "border-primary/40 text-primary bg-primary/10" : "border-border text-muted-foreground"} font-mono`}
-
-                >
-                  {r.role}
-                </span>
-                <span className="text-2xs text-muted-foreground">{r.desc}</span>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </div>
   );
