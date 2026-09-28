@@ -2,6 +2,12 @@
    COMPONENTS - reusable visual patterns built on the tokens.
    ============================================================ */
 
+/* @apply resolves against two different things:
+   - the built-in utility scale (rounded-2xl) -> needs the import
+   - our design tokens (bg-card, border-border) -> needs the reference
+   Neither reaches across a separate @import, so declare both here. */
+@import 'tailwindcss' source(none);
+@reference './tokens.css';
 
 /* Premium card effects */
 .premium-card {

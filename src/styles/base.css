@@ -2,6 +2,10 @@
    BASE - element defaults and typography rules.
    ============================================================ */
 
+/* @reference supplies the @theme token context that @apply needs, without
+   re-emitting any CSS. Each file must declare its own reference because
+   @apply cannot see @theme across a separate @import. */
+@reference './tokens.css';
 
 @layer base {
   * {
